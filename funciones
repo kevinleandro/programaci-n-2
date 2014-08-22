@@ -1,0 +1,108 @@
+#include <iostream>
+#include <conio.h>
+#include <math.h>
+
+using namespace std;
+
+int sumaDigitos (int n){
+	int c=0;
+	while (n>0){
+		n = n / 10;
+		c++;
+	}
+	return (c);
+}
+int sumaDigitosImpares(int n){
+	int d,s=0;
+	while(n>0){
+		d = n % 10;
+		if (d % 2 != 0){
+			s = s + d;
+		}
+		n = n / 10;
+	}
+	return (s);
+}
+int invertirDigitos(int n){
+	int d,nro2=0;
+	while(n>0){
+		d = n % 10;
+		nro2 = nro2 * 10 + d;
+		n = n / 10;
+	} 
+	return (nro2);
+}
+int elimDigImpar(int n){
+	int nronuevo=0,dig,c=0;
+	if (sumaDigitos (n) > sumaDigitos (invertirDigitos(n))){
+		c = sumaDigitos (n) - sumaDigitos (invertirDigitos(n));
+	}
+	while (n > 0){
+		dig = n % 10;
+		if (dig % 2 == 0){
+			nronuevo = nronuevo*10 + dig;
+		}
+		n = n / 10;
+	}
+	return (invertirDigitos(nronuevo)*powf(10,c));
+}
+bool verificarSiEsPrimo(int n){
+	int i;
+	bool k = true;
+	for (i=2;i<=n-1;i++){
+		if (n % i == 0){
+			k = false;
+		}
+	}
+	return (k);
+}
+int sumaDigitosPrimos(int n){
+	int d,s=0;
+	while(n>0){
+		d = n % 10;
+		if (verificarSiEsPrimo(d) == true){
+			s = s + d;
+		}
+		n = n / 10;
+	}
+	return (s);
+}
+bool ordenar(int n){
+	int digAnt,digAct;
+	bool k=true;
+	digAct = n % 10;
+	while ((n>0) && (k == true)){
+		digAct= n % 10;
+		if (digAct > digAnt){
+			k = false;
+		}
+		digAnt = digAct;
+		n = n / 10;
+	}
+	return (k);
+}
+
+
+
+void main (){
+	int nro,r;
+	cout << "\nintroducir un numero:\n";
+	cin >> nro;
+	r = sumaDigitos(nro);
+	cout << "\nla cantidad de digitos es --->>:\n " << r;
+	r = sumaDigitosImpares(nro);
+	cout << "\nla suma de los digitos impares es --->>:\n " << r;
+	r = invertirDigitos(nro);
+	cout << "\nel numero invertido es --->>:\n " << r;
+	r = sumaDigitosPrimos(nro);
+	cout << "\nla suma de los digitos primos es --->>:\n " << r;
+
+	if(ordenar(nro) == false)
+		cout << "\nlos digitos SI estan ordenados...\n";
+	else 
+		cout << "\nlos digitos NO estan ordenados...\n";
+
+
+getch();
+}
+
