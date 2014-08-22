@@ -1,0 +1,53 @@
+#include <iostream>
+#include <conio.h>
+#include <math.h>
+using namespace std;
+void cargarPolinomio(int coef[],int expo[], int n){
+	int i;
+	for(i=0;i<n;i++){
+		cout << "\nIntroducir para termino ["<<i<<"] : \n";
+		cout << "\nCoeficiente : ";
+		cin >> coef[i];
+		cout << "\nExponente: ";
+		cin >> expo[i];
+	}
+}
+void mostrarPolinomio(int coef[],int expo[], int n){
+	int i;
+	cout << endl << "\nEl polinomio es ---->>> : ";
+	for(i=0;i<n;i++){
+		cout << coef[i] << "x" << expo[i]<< "  ";
+	}
+}
+int resolverPolinomio(int coef[],int expo[], int n, int x){
+	int i,s=0;	
+	for(i=0;i<n;i++){
+		s = s + coef[i] * powf(x,expo[i]);
+	}
+	return(s);
+}
+void main(){
+	int coef[30],expo[30],nroTerm=0,opcion,x;
+	do{
+		cout << endl << endl<<"*****  M E N U ******";
+		cout << endl << "1.- Cargar Polinomio";
+		cout << endl << "2.- Mostrar Polinomio";
+		cout << endl << "3.- Resolver Polinomio";
+		cout << endl << "0.- Salir";
+		cout << endl << "Seleccione Opcion : ";
+		cin >> opcion;
+		switch(opcion){
+			case 1 : cout << "Introducir numero de elementos : ";
+					 cin >> nroTerm;
+					 cargarPolinomio(coef,expo,nroTerm);
+					 break;
+			case 2 : mostrarPolinomio(coef,expo,nroTerm);
+					 break;
+			case 3 : cout << "Introducir valor para X : ";
+					 cin >> x;
+					 cout <<"\nResultado es -->> " << resolverPolinomio(coef,expo,nroTerm,x);
+					 break;			
+			
+		}
+	}while(opcion != 0);	
+}
