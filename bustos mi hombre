@@ -1,0 +1,189 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+using namespace std;
+int concatenarNumeros(int a, int b){
+	int d,potencia,total=0,total2,cont=0;
+	int f=a, g=b;
+		if(a>=b){
+			while(a>0){
+				d = a % 10;
+				cont++;
+				a = a / 10;}
+		potencia= powf(10,cont);
+		total = b * potencia + f;
+
+		}else{
+			if(b>=a){
+			while(b>0){
+				d = b % 10;
+				cont++;
+				b = b / 10;}
+		potencia= powf(10,cont);
+
+		total = a * potencia + g;
+		}
+		}
+		return(total);
+}
+int digrepetido(int n){
+
+	int d1,d2,aux,aux2,cont;
+	aux=n;
+	while(aux>0){
+	
+		cont=0;
+		d1=aux%10;
+		aux2=n;
+		while(aux2>0){
+		
+			d2=aux2%10;
+			if(d1==d2){
+			
+				cont++;
+			}
+			aux2=aux2/10;
+		}
+		if(cont>1){
+		return(d1);
+		}
+		aux=aux/10;
+	}
+	return(-1);
+}
+int eliminarNum(int n, int dig){
+
+	int num=0,cont=0,d;
+	while(n>0){
+	
+		d=n%10;
+		if(d!=0){
+		
+			num=num+d*(powf(10,cont));
+			cont++;
+		}
+		n=n/10;
+	}
+	return(num);
+}
+int depurarRepetidos(int n){
+
+	int dig;
+	dig=digrepetido(n);
+	while(dig!=(-1)){
+	
+		n=eliminarNum(n,dig);
+		dig=digrepetido(n);
+	}
+	return(n);
+}
+bool esCapicua(int x){
+
+	int nx=0,n=x;
+	while(x>0){
+	
+		int c;
+		c=x%10;
+		x=x/10;
+		nx=nx*10 + c;
+	}
+	if(nx==n){
+	
+		return true;
+	}
+	else{
+	
+		return false;
+	}
+}
+void secuenciaTresenTres(int n){
+
+	int i,c=3;
+	for(i=0;i<n;i++){
+	cout<< c <<"  " ;
+	c = c + 3;
+
+	}
+}
+void NumAutomorfos(int n)
+{int i,cuadrado,copia,a;
+  for(i=0;i<1000;i++)
+      {cuadrado=i*i;
+        copia=i;
+          a=1;
+   while(copia != 0 && a)
+       {if(copia % 10 != cuadrado % 10)
+        a=0;
+        copia/=10;
+		cuadrado/=10;
+
+       }
+      if(a)
+      cout<<i<<"  ";
+  }
+}
+int invertirNum(int n){
+
+	int d, numero=0;
+	while(n>0){
+	
+		d=n%10;
+		numero=numero*10 + d;
+		n=n/10;
+	}
+	return(numero);
+}
+void main(){
+   
+   int opcion,r,a,b;
+      
+       do{
+           cout << endl << endl<<"***** MENU DE FUNCIONES Y SECUENCIAS ******";
+           cout << endl << "1.- Concatenar dos numeros Naturales.";
+           cout << endl << "2.- Depurar digitos repetidos de un numero natural.";
+           cout << endl << "3.- Verifificar si un numero es capicua. ";
+           cout << endl << "4.- Secuencia de Tres en Tres";
+           cout << endl << "5.- Numeros automorficos.";
+           cout << endl << "6.- Invertir un numero natural.";
+           cout << endl << "0.- Salir";
+           cout << endl << "Seleccione Opcion : ";
+           cin >> opcion;
+           switch(opcion){
+		   case 1 : cout<<endl<< "Ingrese el primer numero: ";
+			        cin>> a;
+			        cout<<endl<< "Ingrese el segundo numero: ";
+					cin>> b;
+					r=concatenarNumeros(a,b);
+                cout<<endl<<"el nuevo numero es "<< r;
+                break;
+                case 2 : cout<<endl<<" Introduzca el numero natural: ";
+                cin>>a;
+                r=depurarRepetidos(a);
+                cout<<" El nuevo numero es ->: "<<r;
+                break;
+				case 3 : cout<<endl<<"Introduzca el numero natural: ";
+			    cin>> a;
+				if(esCapicua(a)==true){
+				
+					cout<<endl<<"El numero "<<a <<" si es capicua";
+				}else{
+					cout<<endl<<"El numero "<<a <<" no es capicua";
+				}
+                break;
+                case 4 : cout<<endl << "Introduzca la cantidad de numeros a mostrar: ";
+					cin>>a;
+                    secuenciaTresenTres(a);
+                    break;
+				case 5: cout<<endl<<"ingrese n: ";
+					cin>>a;
+					NumAutomorfos(a);
+					break;
+				case 6: cout<<endl<<"Introduzca el numero a invertir: ";
+					    cin>>a;
+						r=invertirNum(a);
+						cout<<endl<<"el numero "<<a<<" invertido es "<<r;
+						break;
+               }
+            }while(opcion != 0);
+}
